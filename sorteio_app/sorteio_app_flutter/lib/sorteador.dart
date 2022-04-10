@@ -98,7 +98,7 @@ class _SorteadorPageState extends State<SorteadorPage> {
               key: Key('SorteioButton'),
             ),
             Text(
-              _sorteado != null ? '$_sorteado' : 'Nenhum valor sorteado',
+              _sorteado,
               style: Theme.of(context).textTheme.headline4,
               key: Key('Sorteado'),
             ),

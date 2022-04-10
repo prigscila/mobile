@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.view.View
 import android.widget.EditText
 import android.widget.TextView
+import kotlin.math.absoluteValue
+import kotlin.math.min
 import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
@@ -21,25 +23,36 @@ class MainActivity : AppCompatActivity() {
         resultText = findViewById<TextView>(R.id.resultado);
     }
 
-    fun sortear(buttonView: View) {
+    fun draftValue(buttonView: View) {
         var min = getIntValueFromEditText(minEditText);
         var max = getIntValueFromEditText(maxEditText);
 
-        if (min == null || max == null)
+        if (!isValidForDraft(min, max))
             return;
 
-        var result = Random.nextInt(min, max + 1);
+        var result = Random.nextInt(min!!, max!! + 1);
         resultText.setText(result.toString());
     }
 
     private fun getIntValueFromEditText(editText: EditText): Int? {
         var text = editText.text.toString();
 
-        if (text.isEmpty()) {
-            resultText.setText("Informe um valor!");
+        if (text.isEmpty())
             return null;
+        return text.toInt();
+    }
+
+    private fun isValidForDraft(min: Int?, max: Int?): Boolean {
+        if (min == null || max == null) {
+            resultText.setText("Informe um valor!");
+            return false;
         }
 
-        return text.toInt();
+        if (max < min) {
+            resultText.setText("Escolha um intervalo válido!");
+            return false;
+        }
+
+        return true;
     }
 }

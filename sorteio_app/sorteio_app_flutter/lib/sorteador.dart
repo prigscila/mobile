@@ -12,7 +12,7 @@ class SorteadorPage extends StatefulWidget {
 class _SorteadorPageState extends State<SorteadorPage> {
   int _inicial = 1;
   int _final = 100;
-  int _sorteado;
+  String _sorteado = 'Nenhum valor sorteado';
 
   bool _ehValidoParaSorteio() {
     return _final > _inicial;
@@ -26,7 +26,8 @@ class _SorteadorPageState extends State<SorteadorPage> {
 
     setState(() {
       var random = new Random();
-      _sorteado = _inicial + random.nextInt(_final - _inicial);
+      var valor = _inicial + random.nextInt(_final - _inicial);
+      _sorteado = valor.toString();
     });
   }
 

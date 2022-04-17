@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">paint_app</string>
+    <string name="confirm">Confirmar</string>
+    <string name="cancel">Cancelar</string>
+    <string name="chooseColor">Escolha uma cor</string>
+</resources>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/check"
+        android:icon="@drawable/ic_check_box_24dp"
+        android:title="@string/todo_note"
+        app:showAsAction="always"
+        />
+
+    <item
+        android:id="@+id/brush"
+        android:icon="@drawable/ic_brush_24dp"
+        android:title="@string/draw_note"
+        app:showAsAction="always"
+        />
+
+    <item
+        android:id="@+id/mic"
+        android:icon="@drawable/ic_mic_none_24dp"
+        android:title="@string/record_note"
+        app:showAsAction="always"
+        />
+
+    <item
+        android:id="@+id/image"
+        android:icon="@drawable/ic_image_24dp"
+        android:title="@string/add_image"
+        app:showAsAction="always"
+        />
+</menu>

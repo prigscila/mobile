@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Google Keep Copy</string>
+    <string name="search">Search your notes</string>
+    <string name="record_note">Record Note</string>
+    <string name="add_image">Add Image</string>
+    <string name="draw_note">Draw Note</string>
+    <string name="todo_note">To Do Note</string>
+    <string name="note_example">Aula Desenvolvimento Mobile 1104</string>
+    <string name="note_details">Bora fazer um paint!</string>
+    <string name="tag_example">IFSC</string>
+    <string name="another_note_example">Mini pig</string>
+    <string name="another_note_details">Piggussss</string>
+    <string name="aother_tag_example">Itimalia</string>
+</resources>

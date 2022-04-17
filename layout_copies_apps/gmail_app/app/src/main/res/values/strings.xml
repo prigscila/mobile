@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Gmail Copy</string>
+    <string name="search">Search in mail</string>
+    <string name="primary">Primary</string>
+    <string name="mail">Mail</string>
+    <string name="meet">Meet</string>
+    <string name="compose">Compose</string>
+</resources>

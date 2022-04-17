@@ -11,6 +11,7 @@
 *.class
 
 # Generated files
+local_res/
 bin/
 gen/
 out/

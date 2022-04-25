@@ -6,6 +6,7 @@ import androidx.core.content.ContextCompat;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 
 import com.skydoves.colorpickerview.ActionMode;
 import com.skydoves.colorpickerview.ColorEnvelope;
@@ -50,5 +51,21 @@ public class MainActivity extends AppCompatActivity {
 
     private void setLayoutColor(ColorEnvelope envelope) {
         simplePaint.setColorPaint(envelope.getColor());
+    }
+
+    public void clearDraw(View view) {
+        simplePaint.clearDrawing();
+    }
+
+    public void useLine(View view) {
+        simplePaint.useLine();
+    }
+
+    public void useSquare(View view) {
+        simplePaint.useSquare();
+    }
+
+    public void useCircle(View view) {
+        simplePaint.useCircle();
     }
 }

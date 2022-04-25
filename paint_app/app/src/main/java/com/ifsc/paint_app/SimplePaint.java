@@ -21,6 +21,7 @@ public class SimplePaint extends View {
     Paint currentPaint;
     Path currentPath;
     ColorDrawable currentColor;
+    Shape currentShape;
 
     public SimplePaint(Context context, @Nullable AttributeSet attributeSet) {
         super(context, attributeSet);
@@ -30,6 +31,7 @@ public class SimplePaint extends View {
 
         currentColor = new ColorDrawable();
         currentColor.setColor(Color.BLACK);
+        currentShape = Shape.Line;
 
         initializeLayer();
     }
@@ -86,5 +88,25 @@ public class SimplePaint extends View {
         currentPaint.setStyle(Paint.Style.STROKE);
         currentPaint.setColor(currentColor.getColor());
         currentPaint.setStrokeWidth(20);
+    }
+
+    public void clearDrawing() {
+        paints = new ArrayList<>();
+        paths = new ArrayList<>();
+        initializeLayer();
+
+        invalidate();
+    }
+
+    public void useLine() {
+        currentShape = Shape.Line;
+    }
+
+    public void useSquare() {
+        currentShape = Shape.Square;
+    }
+
+    public void useCircle() {
+        currentShape = Shape.Circle;
     }
 }

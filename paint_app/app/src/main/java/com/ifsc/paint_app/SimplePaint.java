@@ -5,56 +5,86 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.drawable.ColorDrawable;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class SimplePaint extends View {
-    Paint paint;
-    Path path;
+    List<Path> paths;
+    List<Paint> paints;
+    Paint currentPaint;
+    Path currentPath;
+    ColorDrawable currentColor;
 
     public SimplePaint(Context context, @Nullable AttributeSet attributeSet) {
         super(context, attributeSet);
 
-        paint = new Paint();
-        path = new Path();
-        paint.setColor(Color.BLACK);
-        paint.setStyle(Paint.Style.STROKE);
-        paint.setStrokeWidth(20);
+        paths = new ArrayList<>();
+        paints = new ArrayList<>();
+
+        currentColor = new ColorDrawable();
+        currentColor.setColor(Color.BLACK);
+
+        initializeLayer();
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        canvas.drawPath(path, paint);
+
+        for (int i = 0; i < paints.size(); i++) {
+            canvas.drawPath(paths.get(i), paints.get(i));
+        }
+
+        canvas.drawPath(currentPath, currentPaint);
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent motionEvent) {
-        float lx, ly;
-        lx = motionEvent.getX();
-        ly = motionEvent.getY();
+        float x, y;
+        x = motionEvent.getX();
+        y = motionEvent.getY();
 
         switch (motionEvent.getAction()) {
             case MotionEvent.ACTION_BUTTON_PRESS:
-                path.moveTo(lx, ly);
-                path.lineTo(lx, ly);
+            case MotionEvent.ACTION_DOWN:
+                currentPath.moveTo(x, y);
+                currentPath.lineTo(x, y);
                 break;
             case MotionEvent.ACTION_MOVE:
+                currentPath.lineTo(x, y);
+                break;
             case MotionEvent.ACTION_UP:
-                path.lineTo(lx, ly);
+                currentPath.lineTo(x, y);
+                initializeLayer();
                 break;
             default:
                 break;
         }
         invalidate();
 
-        return true; //super.onTouchEvent(motionEvent);
+        return true;
     }
 
     public void setColorPaint(int color) {
-        paint.setColor(color);
+        currentColor.setColor(color);
+        currentPaint.setColor(currentColor.getColor());
+    }
+
+    private void initializeLayer() {
+        currentPaint = new Paint();
+        currentPath = new Path();
+        paths.add(currentPath);
+        paints.add(currentPaint);
+
+        currentPaint.setStyle(Paint.Style.STROKE);
+        currentPaint.setColor(currentColor.getColor());
+        currentPaint.setStrokeWidth(20);
     }
 }

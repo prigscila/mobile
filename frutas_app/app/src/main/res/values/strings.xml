@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">FrutasApp</string>
+    <string name="preco">Preço</string>
+    <string name="preco_venda">Preço venda</string>
+</resources>

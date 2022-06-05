@@ -28,10 +28,10 @@ public class FrutaAdapter extends ArrayAdapter {
         LayoutInflater inflater = LayoutInflater.from(context);
         convertView = inflater.inflate(resource, parent, false);
 
-        TextView tvCodigo = convertView.findViewById(R.id.tvCodigo);
-        TextView tvNome = convertView.findViewById(R.id.tvNome);
-        TextView tvPreco = convertView.findViewById(R.id.tvPreco);
-        TextView tvPrecoVenda = convertView.findViewById(R.id.tvPrecoVenda);
+        TextView tvCodigo = convertView.findViewById(R.id.tvListCodigo);
+        TextView tvNome = convertView.findViewById(R.id.tvListNome);
+        TextView tvPreco = convertView.findViewById(R.id.tvListPreco);
+        TextView tvPrecoVenda = convertView.findViewById(R.id.tvListPrecoVenda);
         ImageView imageView = convertView.findViewById(R.id.imageView);
 
         Fruta fruta = (Fruta) getItem(position);

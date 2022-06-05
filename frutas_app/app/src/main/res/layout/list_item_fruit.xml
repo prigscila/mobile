@@ -5,14 +5,14 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/tvCodigo"
+        android:id="@+id/tvListCodigo"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="TextView" />
 
     <TextView
-        android:id="@+id/tvNome"
+        android:id="@+id/tvListNome"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -44,13 +44,13 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/tvPreco"
+            android:id="@+id/tvListPreco"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="TextView" />
 
         <TextView
-            android:id="@+id/tvPrecoVenda"
+            android:id="@+id/tvListPrecoVenda"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="TextView" />
@@ -62,4 +62,5 @@
         android:layout_height="50dp"
         android:layout_weight="1"
         app:srcCompat="?android:attr/textSelectHandleLeft" />
+
 </LinearLayout>

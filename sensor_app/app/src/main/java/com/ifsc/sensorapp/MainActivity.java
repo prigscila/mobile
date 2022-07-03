@@ -46,45 +46,59 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     @Override
     public void onSensorChanged(SensorEvent event) {
         if (event.sensor == accelerometer) {
-            System.arraycopy(event.values, 0, lastAccelerometer, 0, event.values.length);
+            updateSensor(event, lastAccelerometer);
             isLastAccelerometerArrayCopied = true;
         } else if (event.sensor == magnetometer) {
-            System.arraycopy(event.values, 0, lastMagnetometer, 0, event.values.length);
+            updateSensor(event, lastMagnetometer);
             isLastMagnetometerArrayCopied = true;
         }
 
-        if (isLastMagnetometerArrayCopied && isLastAccelerometerArrayCopied && System.currentTimeMillis() - lastUpdatedTime > 250) {
-            SensorManager.getRotationMatrix(rotationMatrix, null, lastAccelerometer, lastMagnetometer);
-            SensorManager.getOrientation(rotationMatrix, orientation);
+        if (shouldUpdateView()) {
+            float rotationInDegrees = calculateRotationInDegrees();
 
-            float azimuthInRadians = orientation[0];
-            float azimuthInDegrees = (float) Math.toDegrees(azimuthInRadians);
-
-            RotateAnimation rotateAnimation = new RotateAnimation(
-                    currentDegree,
-                    -azimuthInDegrees,
-                    Animation.RELATIVE_TO_SELF,
-                    0.5f,
-                    Animation.RELATIVE_TO_SELF,
-                    0.5f
-            );
-
-            rotateAnimation.setDuration(250);
-            rotateAnimation.setFillAfter(true);
-
-            imageView.startAnimation(rotateAnimation);
-            currentDegree = -azimuthInDegrees;
+            imageView.startAnimation(getRotationAnimation(rotationInDegrees));
+            currentDegree = -rotationInDegrees;
             lastUpdatedTime = System.currentTimeMillis();
 
-            int x = (int)azimuthInDegrees;
+            int x = (int)rotationInDegrees;
             textView.setText(x + "º");
         }
     }
 
-    @Override
-    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+    private RotateAnimation getRotationAnimation(float rotationInDegrees) {
+        RotateAnimation rotateAnimation = new RotateAnimation(
+                currentDegree,
+                -rotationInDegrees,
+                Animation.RELATIVE_TO_SELF,
+                0.5f,
+                Animation.RELATIVE_TO_SELF,
+                0.5f
+        );
 
+        rotateAnimation.setDuration(250);
+        rotateAnimation.setFillAfter(true);
+
+        return rotateAnimation;
     }
+
+    private float calculateRotationInDegrees() {
+        SensorManager.getRotationMatrix(rotationMatrix, null, lastAccelerometer, lastMagnetometer);
+        SensorManager.getOrientation(rotationMatrix, orientation);
+
+        float azimuthInRadians = orientation[0];
+        return (float) Math.toDegrees(azimuthInRadians);
+    }
+
+    private void updateSensor(SensorEvent event, float[] sensor) {
+        System.arraycopy(event.values, 0, sensor, 0, event.values.length);
+    }
+
+    private boolean shouldUpdateView() {
+        return isLastMagnetometerArrayCopied && isLastAccelerometerArrayCopied && System.currentTimeMillis() - lastUpdatedTime > 250;
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy) { }
 
     @Override
     public void onResume() {
